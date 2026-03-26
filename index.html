@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joseph Tourang â Performance. Precision. Transformation.</title>
+    <meta name="description" content="Executive coach, strategist, and advisor. ICF PCC-certified. Working with founders, executives, and high-agency individuals who refuse to plateau.">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a0a0a;
+            --bg-elevated: #111111;
+            --bg-subtle: #161616;
+            --text-primary: #e8e6e3;
+            --text-secondary: #8a8a8a;
+            --text-muted: #555555;
+            --accent: #c9a84c;
+            --accent-dim: #a0833a;
+            --border: #1e1e1e;
+            --border-hover: #2a2a2a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        nav.scrolled {
+            border-bottom-color: var(--border);
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-toggle span {
+            display: block;
+            width: 20px;
+            height: 1px;
+            background: var(--text-primary);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* HERO */
+        .hero-wrapper {
+            position: relative;
+            min-height: 100vh;
+            background: var(--bg);
+            overflow: hidden;
+        }
+
+        .hero-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 120%;
+            background: radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 70%);
+            pointer-events: none;
+            animation: heroGlow 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroGlow {
+            0% { opacity: 0.4; transform: translate(0, 0); }
+            100% { opacity: 1; transform: translate(-5%, 5%); }
+        }
+
+        .hero-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            pointer-events: none;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-label {
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease forwards 0.3s;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 6vw, 5.5rem);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            max-width: 900px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s ease forwards 0.5s;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .hero-sub {
+            margin-top: 2.5rem;
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            max-width: 520px;
+            line-height: 1.7;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease forwards 0.8s;
+        }
+
+        .hero-cta {
+            margin-top: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease forwards 1s;
+        }
+
+        .hero-cta a {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            text-decoration: none;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid var(--accent-dim);
+            transition: all 0.3s ease;
+        }
+
+        .hero-cta a:hover {
+            color: var(--text-primary);
+            border-bottom-color: var(--text-primary);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 1.4s;
+        }
+
+        .scroll-line {
+            width: 40px;
+            height: 1px;
+            background: var(--text-muted);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            animation: scrollPulse 2s ease infinite;
+        }
+
+        .scroll-text {
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* CREDENTIALS STRIP */
+        .credentials-strip {
+            background: var(--bg-elevated);
+            border-bottom: 1px solid var(--border);
+            padding: 1.2rem 3rem;
+            text-align: center;
+        }
+
+        .credentials-inner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .credentials-strip span {
+            font-size: 0.65rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .cred-dot {
+            color: var(--accent-dim) !important;
+            letter-spacing: 0 !important;
+        }
+
+        /* SECTION BASE */
+        section {
+            padding: 8rem 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 3rem;
+        }
+
+        .section-divider {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .section-divider hr {
+            border: none;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* ABOUT */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: start;
+        }
+
+        .about-image {
+            aspect-ratio: 3/4;
+            background: var(--bg-subtle);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-image .placeholder-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 2;
+        }
+
+        .about-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            line-height: 1.3;
+            margin-bottom: 2rem;
+        }
+
+        .about-text p {
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat-item .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--text-primary);
+        }
+
+        .stat-item .stat-label {
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-top: 0.4rem;
+        }
+
+        /* WHAT I DO */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            margin-top: 1rem;
+        }
+
+        .service-card {
+            background: var(--bg-elevated);
+            padding: 3rem 2.5rem;
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            width: 100%;
+        }
+
+        .service-card:hover {
+            background: var(--bg-subtle);
+        }
+
+        .service-number {
+            font-size: 0.65rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 1.2rem;
+        }
+
+        .service-card p {
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* IMAGE BREAK */
+        .image-break {
+            width: 100%;
+            height: 30vh;
+            min-height: 200px;
+            max-height: 350px;
+            background: linear-gradient(135deg, var(--bg) 0%, var(--bg-subtle) 40%, var(--bg-elevated) 70%, var(--bg) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-break::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 70% 50%, rgba(201,168,76,0.04) 0%, transparent 60%);
+        }
+
+        .image-break img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-break-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* PHILOSOPHY */
+        .philosophy {
+            text-align: center;
+            padding: 10rem 3rem;
+            background: url('section-texture.jpg') center/cover no-repeat;
+            position: relative;
+        }
+
+        .philosophy::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            background: url('accent-geometric.png') center/contain no-repeat;
+            opacity: 0.25;
+            pointer-events: none;
+        }
+
+        .philosophy blockquote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+            font-weight: 400;
+            font-style: italic;
+            line-height: 1.4;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-primary);
+            position: relative;
+        }
+
+        .philosophy blockquote::before {
+            content: '\201C';
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            position: absolute;
+            top: -3.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--accent);
+            opacity: 0.2;
+            line-height: 1;
+        }
+
+        .philosophy .quote-attr {
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* CLIENTS */
+        .clients-intro {
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            max-width: 550px;
+            line-height: 1.8;
+            margin-bottom: 4rem;
+        }
+
+        .client-logos {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            align-items: center;
+            justify-items: center;
+            gap: 3rem;
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .client-logo {
+            transition: all 0.3s ease;
+        }
+
+        .client-logo img {
+            height: 36px;
+            width: auto;
+            mix-blend-mode: screen;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .client-logo:hover img {
+            opacity: 0.85;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            margin-top: 4rem;
+        }
+
+        .testimonial-grid .testimonial:nth-child(odd):last-child {
+            grid-column: 1 / -1;
+            max-width: 50%;
+        }
+
+        .testimonial {
+            background: var(--bg-elevated);
+            padding: 3rem;
+            border: 1px solid var(--border);
+        }
+
+        .testimonial p {
+            font-size: 0.95rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--text-primary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-author {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        /* APPLY */
+        .apply-section {
+            padding: 10rem 3rem;
+        }
+
+        .apply-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: start;
+        }
+
+        .apply-left h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+        }
+
+        .apply-left p {
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .apply-criteria {
+            margin-top: 2.5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .apply-criteria h4 {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1.2rem;
+        }
+
+        .apply-criteria li {
+            list-style: none;
+            font-size: 0.88rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            padding: 0.5rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .apply-criteria li::before {
+            content: 'â';
+            position: absolute;
+            left: 0;
+            color: var(--text-muted);
+        }
+
+        /* FORM */
+        .apply-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 300;
+            padding: 1rem 1.2rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+            -webkit-appearance: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--accent-dim);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-group select {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23555' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.2rem center;
+        }
+
+        .form-group select option {
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+        }
+
+        .submit-btn {
+            margin-top: 1rem;
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding: 1.2rem 3rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            align-self: flex-start;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 4rem 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-left {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        .footer-right {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .footer-right a {
+            font-size: 0.68rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-right a:hover {
+            color: var(--text-primary);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scrollPulse {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 968px) {
+            nav {
+                padding: 1.2rem 2rem;
+            }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: var(--bg);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                z-index: 99;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                font-size: 1rem;
+            }
+
+            .mobile-toggle {
+                display: block;
+                z-index: 101;
+            }
+
+            .hero {
+                padding: 0 2rem;
+            }
+
+            section {
+                padding: 5rem 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-image {
+                max-height: 400px;
+            }
+
+            .about-stats {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .apply-content {
+
+                  grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .apply-section {
+                padding: 6rem 2rem;
+            }
+
+            .philosophy {
+                padding: 6rem 2rem;
+            }
+
+            .client-logos {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+                padding: 3rem 2rem;
+            }
+
+            .section-divider {
+                padding: 0 2rem;
+            }
+
+            .scroll-indicator {
+                left: 2rem;
+                bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-stats {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .footer-right {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav id="navbar">
+        <a href="#" class="nav-logo">Joseph Tourang</a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about" onclick="closeNav()">About</a></li>
+            <li><a href="#work" onclick="closeNav()">Work</a></li>
+            <li><a href="#clients" onclick="closeNav()">Clients</a></li>
+            <li><a href="#apply" onclick="closeNav()">Contact</a></li>
+        </ul>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero-wrapper">
+    <section class="hero">
+        <div class="hero-label">Executive Coach &middot; Strategist &middot; Advisor</div>
+        <h1>The standard you walk past is the standard you <em>accept.</em></h1>
+        <p class="hero-sub">I work with founders, executives, and high-agency individuals who have already proven themselves â and refuse to plateau.</p>
+        <div class="hero-cta">
+            <a href="#apply">Start a Conversation</a>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+            <span class="scroll-text">Scroll</span>
+        </div>
+    </section>
+    </div>
+
+    <!-- CREDENTIALS STRIP -->
+    <div class="credentials-strip">
+        <div class="credentials-inner">
+            <span>ICF PCC Certified</span>
+            <span class="cred-dot">&middot;</span>
+            <span>2,300+ Coaching Hours</span>
+            <span class="cred-dot">&middot;</span>
+            <span>NLP Practitioner (INLPTA)</span>
+            <span class="cred-dot">&middot;</span>
+            <span>All Continents</span>
+        </div>
+    </div>
+
+    <div class="section-divider"><hr></div>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="section-label reveal">About</div>
+        <div class="about-content">
+            <div class="about-image reveal">
+                <!-- Save your library photo as joseph-tourang.jpg in the same folder -->
+                <img src="joseph-tourang.jpg" alt="Joseph Tourang">
+            </div>
+            <div class="about-text">
+                <h2 class="reveal">Precision over motivation. Substance over noise.</h2>
+                <p class="reveal">ICF PCC-certified. 2,300+ hours of coaching. NLP practitioner. Former corporate leadership in Nordic media â Head of Retention and Winback. The corporate track ended in 2016. Not because it stopped working. Because something sharper was possible.</p>
+                <p class="reveal">Hundreds of executives, founders, and leaders across the UK, US, UAE, and the Netherlands. Workshops for thousands. The work is selective. The standards are non-negotiable. Every engagement starts from the same premise: you are already capable of more than you are currently delivering.</p>
+                <div class="about-stats reveal">
+                    <div class="stat-item">
+                        <div class="stat-number">2,300+</div>
+                        <div class="stat-label">Coaching Hours</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">400+</div>
+                        <div class="stat-label">Workshops</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">All</div>
+                        <div class="stat-label">Continents</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"><hr></div>
+
+    <!-- WHAT I DO -->
+    <section id="work">
+        <div class="section-label reveal">What I Do</div>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-number">01</div>
+                <h3>1:1 Executive Coaching</h3>
+                <p>Deep, sustained work with a single objective: closing the gap between where you are and where you know you should be. Not therapy. Not accountability calls. Precision intervention at the highest level.</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-number">02</div>
+                <h3>Leadership Development</h3>
+                <p>Designed for leadership teams who understand that culture is not a poster on the wall. Bespoke programs built around your organization's real constraints â not generic frameworks.</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-number">03</div>
+                <h3>Workshops & Facilitation</h3>
+                <p>High-impact sessions for teams and organizations. Every workshop is built from scratch. No recycled slides. No participation trophies. You leave with clarity or you leave with discomfort. Both are useful.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FULL-WIDTH IMAGE BREAK -->
+    <div class="image-break reveal">
+        <!-- REPLACE: Add a wide environmental/workshop photo here -->
+        <!-- <img src="your-wide-photo.jpg" alt="Joseph Tourang in action"> -->
+        <!-- Replace with: <img src="your-wide-photo.jpg" alt="Joseph Tourang"> -->
+    </div>
+
+    <!-- PHILOSOPHY -->
+    <div class="section-divider"><hr></div>
+    <section class="philosophy">
+        <blockquote class="reveal">"Most people don't need more information. They need fewer lies they tell themselves."</blockquote>
+        <div class="quote-attr reveal">â Joseph Tourang</div>
+    </section>
+    <div class="section-divider"><hr></div>
+
+    <!-- CLIENTS -->
+    <section id="clients">
+        <div class="section-label reveal">Select Clients & Results</div>
+        <p class="clients-intro reveal">Leaders across energy, tech, automotive, and consumer brands. The work speaks through reputation â not volume.</p>
+        <div class="client-logos reveal">
+            <span class="client-logo"><img src="https://static.wixstatic.com/media/6afcc7_63dde7b836c54a00856d524753267474~mv2.png/v1/fill/w_592,h_194,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/6afcc7_63dde7b836c54a00856d524753267474~mv2.png" alt="Siemens Energy"></span>
+            <span class="client-logo"><img src="https://static.wixstatic.com/media/6afcc7_2da6c842a8ed450fa47a862765591ca2~mv2.png/v1/fill/w_376,h_216,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/6afcc7_2da6c842a8ed450fa47a862765591ca2~mv2.png" alt="Coca-Cola Europacific Partners"></span>
+            <span class="client-logo"><img src="https://static.wixstatic.com/media/6afcc7_556c268474e3454495cc259b148c65cb~mv2.png/v1/fill/w_840,h_188,al_c,lg_1,q_85,enc_avif,quality_auto/6afcc7_556c268474e3454495cc259b148c65cb~mv2.png" alt="Nissan Motor Corporation"></span>
+            <span class="client-logo"><img src="https://static.wixstatic.com/media/6afcc7_f4c8e6b5f9f64d42be8f4ebcd7e307db~mv2.png/v1/fill/w_308,h_194,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/6afcc7_f4c8e6b5f9f64d42be8f4ebcd7e307db~mv2.png" alt="Amazon Web Services"></span>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial reveal">
+                <p>"Genuine insight and a complete lack of BS. Within two sessions my life had tangibly changed â and just kept getting better with each one."</p>
+                <div class="testimonial-author">Alex Elworthy â Global Project Manager</div>
+            </div>
+            <div class="testimonial reveal">
+                <p>"A remarkable ability to guide me through complex situations, think deeper into the issues, and avoid getting stuck in the mental loop. I've gained a clearer perspective and improved my ability to navigate challenges effectively."</p>
+                <div class="testimonial-author">Saskia Routs â Siemens Energy</div>
+            </div>
+            <div class="testimonial reveal">
+                <p>"He helped me navigate complex situations with ease and taught me to be less critical of myself. The improvement in my self-confidence was the most significant impact. I wholeheartedly recommend Joseph to anyone seeking to enhance their leadership."</p>
+                <div class="testimonial-author">Ilaria Fiorentino â Director, Global Personal Shopping & Client Relations, Mytheresa</div>
+            </div>
+            <div class="testimonial reveal">
+                <p>"Joseph has a unique ability to challenge your perceptions and evoke greater awareness. I have seen significant improvements in myself, both professionally and personally. Absolutely no hesitation in recommending him as an exceptional coach."</p>
+                <div class="testimonial-author">Robyn Jones â Senior Legal Counsel</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"><hr></div>
+
+    <!-- APPLY -->
+    <section id="apply" class="apply-section">
+        <div class="apply-content">
+            <div class="apply-left">
+                <div class="section-label reveal">Contact</div>
+                <h2 class="reveal">Every engagement begins with a conversation.</h2>
+            </div>
+            <form class="apply-form reveal" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="role">Current Role & Company</label>
+                    <input type="text" id="role" name="role" required>
+                </div>
+                <div class="form-group">
+                    <label for="interest">What are you looking for?</label>
+                    <select id="interest" name="interest" required>
+                        <option value="" disabled selected>Select one</option>
+                        <option value="executive-coaching">1:1 Executive Coaching</option>
+                        <option value="leadership-development">Leadership Development</option>
+                        <option value="workshop">Workshop or Facilitation</option>
+                        <option value="other">Something Else</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="context">What would make the next 12 months a success for you?</label>
+                    <textarea id="context" name="context" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="referral">How did you find me?</label>
+                    <input type="text" id="referral" name="referral">
+                </div>
+                <button type="submit" class="submit-btn">Send</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-left">Joseph Tourang &middot; Kureos</div>
+        <div class="footer-right">
+            <a href="mailto:joseph.tourang@kureos.com">Email</a>
+            <a href="https://www.linkedin.com/in/joseph-tourang/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="#apply">Contact</a>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Mobile nav
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        function closeNav() {
+            navLinks.classList.remove('open');
+        }
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Form handler
+        function handleSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('.submit-btn');
+            btn.textContent = 'Received';
+            btn.style.borderColor = 'var(--accent)';
+            btn.style.background = 'var(--accent)';
+            btn.style.color = 'var(--bg)';
+            btn.disabled = true;
+
+            // In production, wire this to your backend or email service
+            // e.g., Formspree, Netlify Forms, or a custom endpoint
+        }
+    </script>
+
+</body>
+</html>
