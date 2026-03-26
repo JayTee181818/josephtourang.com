@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joseph Tourang â Performance. Precision. Transformation.</title>
+    <title>Joseph Tourang — Performance. Precision. Transformation.</title>
     <meta name="description" content="Executive coach, strategist, and advisor. ICF PCC-certified. Working with founders, executives, and high-agency individuals who refuse to plateau.">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" href="favicon.png">
@@ -74,12 +74,23 @@
         }
 
         .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .nav-logo svg {
+            width: 38px;
+            height: 38px;
+        }
+
+        .nav-logo-text {
             font-family: 'Playfair Display', serif;
             font-size: 1.1rem;
             font-weight: 500;
             letter-spacing: 0.05em;
             color: var(--text-primary);
-            text-decoration: none;
         }
 
         .nav-links {
@@ -459,42 +470,93 @@
             line-height: 1.7;
         }
 
-        /* IMAGE BREAK */
+        /* IMAGE BREAK — atmospheric */
         .image-break {
             width: 100%;
-            height: 30vh;
-            min-height: 200px;
-            max-height: 350px;
-            background: linear-gradient(135deg, var(--bg) 0%, var(--bg-subtle) 40%, var(--bg-elevated) 70%, var(--bg) 100%);
+            height: 40vh;
+            min-height: 280px;
+            max-height: 450px;
             position: relative;
             overflow: hidden;
+            background: var(--bg);
         }
 
-        .image-break::before {
-            content: '';
+        .image-break-bg {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(ellipse at 70% 50%, rgba(201,168,76,0.04) 0%, transparent 60%);
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 60%, rgba(201,168,76,0.07) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 80% at 80% 30%, rgba(201,168,76,0.05) 0%, transparent 50%),
+                radial-gradient(ellipse 120% 60% at 50% 100%, rgba(201,168,76,0.03) 0%, transparent 40%),
+                linear-gradient(180deg, var(--bg) 0%, #0d0d0d 30%, #111 50%, #0d0d0d 70%, var(--bg) 100%);
         }
 
-        .image-break img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .image-break-placeholder {
+        .image-break-lines {
             position: absolute;
-            top: 50%;
+            inset: 0;
+            opacity: 0.15;
+            background-image:
+                linear-gradient(90deg, transparent 49.5%, rgba(201,168,76,0.15) 49.5%, rgba(201,168,76,0.15) 50.5%, transparent 50.5%);
+            background-size: 120px 100%;
+        }
+
+        .image-break-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+            filter: blur(40px);
+            animation: floatGlow 8s ease-in-out infinite;
+        }
+
+        .image-break-glow:nth-child(2) {
+            right: 15%;
+            top: 10%;
+            width: 200px;
+            height: 200px;
+            animation-delay: -4s;
+            animation-duration: 10s;
+        }
+
+        .image-break-glow:nth-child(3) {
+            left: 30%;
+            bottom: 10%;
+            width: 250px;
+            height: 250px;
+            animation-delay: -2s;
+            animation-duration: 12s;
+        }
+
+        @keyframes floatGlow {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+            33% { transform: translate(30px, -20px) scale(1.1); opacity: 1; }
+            66% { transform: translate(-20px, 15px) scale(0.9); opacity: 0.7; }
+        }
+
+        .image-break-divider {
+            position: absolute;
             left: 50%;
+            top: 50%;
             transform: translate(-50%, -50%);
-            font-size: 0.65rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .image-break-divider .ib-line {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0.4;
+        }
+
+        .image-break-divider .ib-diamond {
+            width: 8px;
+            height: 8px;
+            border: 1px solid var(--accent);
+            transform: rotate(45deg);
+            opacity: 0.5;
         }
 
         /* PHILOSOPHY */
@@ -678,7 +740,7 @@
         }
 
         .apply-criteria li::before {
-            content: 'â';
+            content: '—';
             position: absolute;
             left: 0;
             color: var(--text-muted);
@@ -860,6 +922,15 @@
                 z-index: 101;
             }
 
+            .nav-logo-text {
+                display: none;
+            }
+
+            .nav-logo svg {
+                width: 34px;
+                height: 34px;
+            }
+
             .hero {
                 padding: 0 2rem;
             }
@@ -891,8 +962,7 @@
             }
 
             .apply-content {
-
-                  grid-template-columns: 1fr;
+                grid-template-columns: 1fr;
                 gap: 4rem;
             }
 
@@ -944,7 +1014,13 @@
 
     <!-- NAV -->
     <nav id="navbar">
-        <a href="#" class="nav-logo">Joseph Tourang</a>
+        <a href="#" class="nav-logo">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="96" height="96" rx="4" fill="none" stroke="#c9a84c" stroke-width="1.5" opacity="0.6"/>
+                <text x="28" y="68" font-family="'Playfair Display', Georgia, serif" font-size="52" font-weight="600" fill="#c9a84c" letter-spacing="-2">JT</text>
+            </svg>
+            <span class="nav-logo-text">Joseph Tourang</span>
+        </a>
         <ul class="nav-links" id="navLinks">
             <li><a href="#about" onclick="closeNav()">About</a></li>
             <li><a href="#work" onclick="closeNav()">Work</a></li>
@@ -962,7 +1038,7 @@
     <section class="hero">
         <div class="hero-label">Executive Coach &middot; Strategist &middot; Advisor</div>
         <h1>The standard you walk past is the standard you <em>accept.</em></h1>
-        <p class="hero-sub">I work with founders, executives, and high-agency individuals who have already proven themselves â and refuse to plateau.</p>
+        <p class="hero-sub">I work with founders, executives, and high-agency individuals who have already proven themselves — and refuse to plateau.</p>
         <div class="hero-cta">
             <a href="#apply">Start a Conversation</a>
         </div>
@@ -993,12 +1069,18 @@
         <div class="section-label reveal">About</div>
         <div class="about-content">
             <div class="about-image reveal">
-                <!-- Save your library photo as joseph-tourang.jpg in the same folder -->
-                <img src="joseph-tourang.jpg" alt="Joseph Tourang">
+                <img src="joseph-tourang.jpg" alt="Joseph Tourang" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="photo-placeholder" style="display:none;position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:center;gap:1rem;">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:80px;height:80px;opacity:0.3">
+                        <rect x="2" y="2" width="96" height="96" rx="4" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
+                        <text x="28" y="68" font-family="'Playfair Display', Georgia, serif" font-size="52" font-weight="600" fill="#c9a84c" letter-spacing="-2">JT</text>
+                    </svg>
+                    <span style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted)">Photo coming soon</span>
+                </div>
             </div>
             <div class="about-text">
                 <h2 class="reveal">Precision over motivation. Substance over noise.</h2>
-                <p class="reveal">ICF PCC-certified. 2,300+ hours of coaching. NLP practitioner. Former corporate leadership in Nordic media â Head of Retention and Winback. The corporate track ended in 2016. Not because it stopped working. Because something sharper was possible.</p>
+                <p class="reveal">ICF PCC-certified. 2,300+ hours of coaching. NLP practitioner. Former corporate leadership in Nordic media — Head of Retention and Winback. The corporate track ended in 2016. Not because it stopped working. Because something sharper was possible.</p>
                 <p class="reveal">Hundreds of executives, founders, and leaders across the UK, US, UAE, and the Netherlands. Workshops for thousands. The work is selective. The standards are non-negotiable. Every engagement starts from the same premise: you are already capable of more than you are currently delivering.</p>
                 <div class="about-stats reveal">
                     <div class="stat-item">
@@ -1032,7 +1114,7 @@
             <div class="service-card reveal">
                 <div class="service-number">02</div>
                 <h3>Leadership Development</h3>
-                <p>Designed for leadership teams who understand that culture is not a poster on the wall. Bespoke programs built around your organization's real constraints â not generic frameworks.</p>
+                <p>Designed for leadership teams who understand that culture is not a poster on the wall. Bespoke programs built around your organization's real constraints — not generic frameworks.</p>
             </div>
             <div class="service-card reveal">
                 <div class="service-number">03</div>
@@ -1042,25 +1124,32 @@
         </div>
     </section>
 
-    <!-- FULL-WIDTH IMAGE BREAK -->
+    <!-- FULL-WIDTH IMAGE BREAK — atmospheric -->
     <div class="image-break reveal">
-        <!-- REPLACE: Add a wide environmental/workshop photo here -->
-        <!-- <img src="your-wide-photo.jpg" alt="Joseph Tourang in action"> -->
-        <!-- Replace with: <img src="your-wide-photo.jpg" alt="Joseph Tourang"> -->
+        <div class="image-break-bg"></div>
+        <div class="image-break-lines"></div>
+        <div class="image-break-glow" style="left:10%;top:20%"></div>
+        <div class="image-break-glow"></div>
+        <div class="image-break-glow"></div>
+        <div class="image-break-divider">
+            <span class="ib-line"></span>
+            <span class="ib-diamond"></span>
+            <span class="ib-line"></span>
+        </div>
     </div>
 
     <!-- PHILOSOPHY -->
     <div class="section-divider"><hr></div>
     <section class="philosophy">
         <blockquote class="reveal">"Most people don't need more information. They need fewer lies they tell themselves."</blockquote>
-        <div class="quote-attr reveal">â Joseph Tourang</div>
+        <div class="quote-attr reveal">— Joseph Tourang</div>
     </section>
     <div class="section-divider"><hr></div>
 
     <!-- CLIENTS -->
     <section id="clients">
         <div class="section-label reveal">Select Clients & Results</div>
-        <p class="clients-intro reveal">Leaders across energy, tech, automotive, and consumer brands. The work speaks through reputation â not volume.</p>
+        <p class="clients-intro reveal">Leaders across energy, tech, automotive, and consumer brands. The work speaks through reputation — not volume.</p>
         <div class="client-logos reveal">
             <span class="client-logo"><img src="https://static.wixstatic.com/media/6afcc7_63dde7b836c54a00856d524753267474~mv2.png/v1/fill/w_592,h_194,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/6afcc7_63dde7b836c54a00856d524753267474~mv2.png" alt="Siemens Energy"></span>
             <span class="client-logo"><img src="https://static.wixstatic.com/media/6afcc7_2da6c842a8ed450fa47a862765591ca2~mv2.png/v1/fill/w_376,h_216,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/6afcc7_2da6c842a8ed450fa47a862765591ca2~mv2.png" alt="Coca-Cola Europacific Partners"></span>
@@ -1069,20 +1158,20 @@
         </div>
         <div class="testimonial-grid">
             <div class="testimonial reveal">
-                <p>"Genuine insight and a complete lack of BS. Within two sessions my life had tangibly changed â and just kept getting better with each one."</p>
-                <div class="testimonial-author">Alex Elworthy â Global Project Manager</div>
+                <p>"Genuine insight and a complete lack of BS. Within two sessions my life had tangibly changed — and just kept getting better with each one."</p>
+                <div class="testimonial-author">Alex Elworthy — Global Project Manager</div>
             </div>
             <div class="testimonial reveal">
                 <p>"A remarkable ability to guide me through complex situations, think deeper into the issues, and avoid getting stuck in the mental loop. I've gained a clearer perspective and improved my ability to navigate challenges effectively."</p>
-                <div class="testimonial-author">Saskia Routs â Siemens Energy</div>
+                <div class="testimonial-author">Saskia Routs — Siemens Energy</div>
             </div>
             <div class="testimonial reveal">
                 <p>"He helped me navigate complex situations with ease and taught me to be less critical of myself. The improvement in my self-confidence was the most significant impact. I wholeheartedly recommend Joseph to anyone seeking to enhance their leadership."</p>
-                <div class="testimonial-author">Ilaria Fiorentino â Director, Global Personal Shopping & Client Relations, Mytheresa</div>
+                <div class="testimonial-author">Ilaria Fiorentino — Director, Global Personal Shopping & Client Relations, Mytheresa</div>
             </div>
             <div class="testimonial reveal">
                 <p>"Joseph has a unique ability to challenge your perceptions and evoke greater awareness. I have seen significant improvements in myself, both professionally and personally. Absolutely no hesitation in recommending him as an exceptional coach."</p>
-                <div class="testimonial-author">Robyn Jones â Senior Legal Counsel</div>
+                <div class="testimonial-author">Robyn Jones — Senior Legal Counsel</div>
             </div>
         </div>
     </section>
