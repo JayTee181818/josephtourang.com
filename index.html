@@ -1069,7 +1069,7 @@
         <div class="section-label reveal">About</div>
         <div class="about-content">
             <div class="about-image reveal">
-                <img src="joseph-tourang..jpg" alt="Joseph Tourang" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <img src="joseph-tourang.jpg" alt="Joseph Tourang" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
                 <div class="photo-placeholder" style="display:none;position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:center;gap:1rem;">
                     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:80px;height:80px;opacity:0.3">
                         <rect x="2" y="2" width="96" height="96" rx="4" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
@@ -1185,7 +1185,7 @@
                 <div class="section-label reveal">Contact</div>
                 <h2 class="reveal">Every engagement begins with a conversation.</h2>
             </div>
-            <form class="apply-form reveal" onsubmit="handleSubmit(event)">
+            <form class="apply-form reveal" action="https://formspree.io/f/xnjonyrk" method="POST" onsubmit="handleSubmit(event)">
                 <div class="form-group">
                     <label for="name">Full Name</label>
                     <input type="text" id="name" name="name" required>
@@ -1266,17 +1266,32 @@
 
         // Form handler
         function handleSubmit(e) {
-            e.preventDefault();
-            const btn = e.target.querySelector('.submit-btn');
-            btn.textContent = 'Received';
-            btn.style.borderColor = 'var(--accent)';
-            btn.style.background = 'var(--accent)';
-            btn.style.color = 'var(--bg)';
-            btn.disabled = true;
-
-            // In production, wire this to your backend or email service
-            // e.g., Formspree, Netlify Forms, or a custom endpoint
-        }
+        e.preventDefault();
+        const form = e.target;
+        const btn = form.querySelector('.submit-btn');
+        const data = new FormData(form);
+        btn.textContent = 'Sending...';
+        btn.disabled = true;
+        fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+        }).then(r => {
+            if (r.ok) {
+                btn.textContent = 'Received';
+                btn.style.borderColor = 'var(--accent)';
+                btn.style.background = 'var(--accent)';
+                btn.style.color = 'var(--bg)';
+                form.reset();
+            } else {
+                btn.textContent = 'Error \u2014 try again';
+                btn.disabled = false;
+            }
+        }).catch(() => {
+            btn.textContent = 'Error \u2014 try again';
+            btn.disabled = false;
+        });
+    }
     </script>
 
 </body>
