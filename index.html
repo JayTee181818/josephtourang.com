@@ -21,7 +21,7 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&display=swap&family=Pinyon+Script" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after {
             margin: 0;
@@ -99,19 +99,10 @@
         }
 
         .logo-monogram {
-            font-family: 'Pinyon Script', cursive;
-            font-size: 1.8rem;
-            color: var(--accent);
-            width: 2.4rem;
-            height: 2.4rem;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(201, 168, 76, 0.4);
-            border-radius: 50%;
-            margin-right: 0.75rem;
-            line-height: 1;
-            padding-bottom: 2px;
+            margin-right: 0.85rem;
             transition: all 0.4s ease;
         }
 
@@ -1321,9 +1312,8 @@
             }
 
             .logo-monogram {
-                font-size: 1.5rem;
-                width: 2rem;
-                height: 2rem;
+                width: 30px;
+                height: 30px;
                 margin-right: 0.5rem;
             }
 
@@ -1432,7 +1422,26 @@
     <!-- NAV -->
     <nav id="navbar">
         <a href="#" class="nav-logo">
-            <span class="logo-monogram">JT</span>
+            <svg class="logo-monogram" viewBox="0 0 48 48" width="38" height="38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="jt-gold" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#dbc06e"/>
+                        <stop offset="45%" stop-color="#c9a84c"/>
+                        <stop offset="100%" stop-color="#a8893a"/>
+                    </linearGradient>
+                </defs>
+                <!-- J: serif capital, stem at x=18 -->
+                <path d="M8 3 L8 1.5 Q8 0.5 9 0.5 L27 0.5 Q28 0.5 28 1.5 L28 3 Q28 4 27 4 L9 4 Q8 4 8 3 Z" fill="url(#jt-gold)"/>
+                <rect x="16.5" y="3.5" width="3" height="32" fill="url(#jt-gold)"/>
+                <path d="M16.5 33 L16.5 38 Q16.5 44.5, 10 45.5 Q4 46.5, 1.5 42.5 L3.5 40.5 Q5.5 44, 10 43 Q14 42, 14 38 L14 33 Z" fill="url(#jt-gold)"/>
+                <!-- T: serif capital, crossbar weaves behind J -->
+                <rect x="4" y="12" width="12" height="3" rx="0.5" fill="url(#jt-gold)" opacity="0.55"/>
+                <rect x="20" y="12" width="24" height="3" rx="0.5" fill="url(#jt-gold)"/>
+                <rect x="4" y="10.5" width="2" height="6" rx="0.5" fill="url(#jt-gold)" opacity="0.55"/>
+                <rect x="42" y="10.5" width="2" height="6" rx="0.5" fill="url(#jt-gold)"/>
+                <rect x="28.5" y="14.5" width="3" height="28" fill="url(#jt-gold)"/>
+                <path d="M22 43 L22 41 Q22 40 23 40 L37 40 Q38 40 38 41 L38 43 Q38 44 37 44 L23 44 Q22 44 22 43 Z" fill="url(#jt-gold)"/>
+            </svg>
             <span class="nav-logo-wordmark">Joseph Tourang</span>
         </a>
         <ul class="nav-links" id="navLinks">
