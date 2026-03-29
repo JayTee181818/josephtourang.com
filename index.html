@@ -179,6 +179,19 @@
             transition: all 0.3s ease;
         }
 
+        /* Hamburger to X animation */
+        .mobile-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(4px, 4px);
+        }
+
+        .mobile-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(4px, -4px);
+        }
+
         /* ============================================
            CINEMATIC HERO
            ============================================ */
@@ -1251,7 +1264,7 @@
                 justify-content: center;
                 align-items: center;
                 gap: 2rem;
-                z-index: 99;
+                z-index: 200;
             }
 
             .nav-links.open {
@@ -1264,7 +1277,7 @@
 
             .mobile-toggle {
                 display: block;
-                z-index: 101;
+                z-index: 201;
             }
 
             .nav-logo-wordmark {
@@ -1380,6 +1393,7 @@
             <li><a href="#apply" onclick="closeNav()">Contact</a></li>
         </ul>
         <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+            <span></span>
             <span></span>
             <span></span>
         </button>
@@ -1601,10 +1615,12 @@
 
         mobileToggle.addEventListener('click', () => {
             navLinks.classList.toggle('open');
+            mobileToggle.classList.toggle('active');
         });
 
         function closeNav() {
             navLinks.classList.remove('open');
+            mobileToggle.classList.remove('active');
         }
 
         // Cinematic scroll reveal with staggered delays
