@@ -1252,9 +1252,15 @@
                 padding: 1.2rem 2rem;
             }
 
+            nav.menu-open {
+                bottom: 0;
+                backdrop-filter: none;
+                background: var(--bg);
+            }
+
             .nav-links {
                 display: none;
-                position: fixed;
+                position: absolute;
                 top: 0;
                 left: 0;
                 right: 0;
@@ -1264,7 +1270,7 @@
                 justify-content: center;
                 align-items: center;
                 gap: 2rem;
-                z-index: 200;
+                z-index: 10;
             }
 
             .nav-links.open {
@@ -1616,11 +1622,13 @@
         mobileToggle.addEventListener('click', () => {
             navLinks.classList.toggle('open');
             mobileToggle.classList.toggle('active');
+            document.querySelector('nav').classList.toggle('menu-open');
         });
 
         function closeNav() {
             navLinks.classList.remove('open');
             mobileToggle.classList.remove('active');
+            document.querySelector('nav').classList.remove('menu-open');
         }
 
         // Cinematic scroll reveal with staggered delays
